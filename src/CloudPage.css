@@ -182,7 +182,7 @@
   .env-blocks { flex-direction: column; }
   .env-block { flex: 1 1 100% !important; order: unset !important; }
 }
-/* LIGHT MODE */
+/* LIGHT MODE */  
 .cloud-container.light { background: #f7f7f7; color: #222; }
 .cloud-container.light .cloud-header,
 .cloud-container.light .controls,
@@ -200,3 +200,18 @@
 .cloud-container.light .modal-field input,
 .cloud-container.light .modal-field select,
 .cloud-container.light .modal-field textarea { background:#fff; color:#222; border:2px solid #ccc; }  
+
+
+/* Improve visibility for client info/meta labels in light mode */
+.cloud-container.light .client-status,
+.cloud-container.light .env-block {
+  color: white !important; /* solid dark text for better readability */
+}
+
+/* If any small labels like PRD/ID/LINK are inside client cards or modal fields */
+.cloud-container.light .client-meta .meta-item span,
+.cloud-container.light .env-block label,
+.cloud-container.light .modal-field label {
+  color: white !important; /* slightly darker text */
+  font-weight: 600; /* makes them stand out */
+}
