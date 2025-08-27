@@ -1,0 +1,177 @@
+/* ---- Container ---- */
+.home-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+  background: #121212;
+  color: #e5e5e5;
+}
+
+/* ---- Header ---- */
+.home-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.home-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.home-header p {
+  font-size: 1.2rem;
+  color: inherit;
+}
+
+/* ---- Tiles Grid ---- */
+.tiles-grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---- Tile Card ---- */
+.tile {
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.tile:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.12);
+}
+
+/* ---- Tile Title ---- */
+.tile h2 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+.tile p {
+  font-size: 0.95rem;
+  color: inherit;
+}
+
+/* ---- Tile Buttons ---- */
+.tile a button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tile.vault a button {
+  background-color: #4ade80;
+  color: #fff;
+}
+.tile.vault a button:hover {
+  background-color: #16a34a;
+}
+.tile.training a button {
+  background-color: #3b82f6;
+  color: #fff;
+}
+.tile.training a button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ---- Dark / Light Mode Toggle ---- */
+.theme-toggle {
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #3a3a3a, #2c2c2c);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  position: fixed;  /* FIXED GLOBALLY */
+  top: 20px;
+  right: 20px;
+  transition: background 0.5s ease;
+  z-index: 9999;
+}
+.toggle-ball {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform 0.5s ease, background 0.5s ease;
+}
+.theme-toggle .toggle-ball.dark { transform: translateX(0); }
+.theme-toggle .toggle-ball.light { transform: translateX(30px) rotate(360deg); background: #ffd93b; }
+
+/* ---- Light Mode ---- */
+.home-container.light {
+  background: #f7f7f7;
+  color: #222;
+}
+
+
+.home-container.light .tile {
+  background: rgba(0,0,0,0.03);
+  color: #222;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.home-container.light .tile:hover {
+  background: rgba(0,0,0,0.08);
+}
+.home-container.light .tile.vault a button { background-color: #16a34a; }
+.home-container.light .tile.training a button { background-color: #1d4ed8; }
+
+/* ---- Footer ---- */
+.home-footer {
+  text-align: center;
+  margin-top: 80px;
+  color: inherit;
+}
+/* ---- Logout Button ---- */
+.logout-btn {
+  margin: 20px; /* space from top and sides */
+  padding: 8px 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #ef4444; /* red for logout */
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Hover effect */
+.logout-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Light mode adjustments */
+.light .logout-btn {
+  background-color: #b91c1c;
+  color: #fff;
+}
+
+.light .logout-btn:hover {
+  background-color: #991b1b;
+}

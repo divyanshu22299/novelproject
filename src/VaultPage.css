@@ -1,0 +1,128 @@
+.vault-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.vault-container.dark {
+  background: #121212;
+  color: #e5e5e5;
+}
+
+.vault-container.light {
+  background: #f7f7f7;
+  color: #222;
+}
+
+.vault-header h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.vault-header p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: inherit;
+}
+
+.tiles-grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tile {
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  cursor: pointer;
+  width: 300px;
+  height: 200px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  color: inherit;
+}
+
+.tile:hover:not(.disabled) {
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.tile h2 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.tile p {
+  font-size: 0.95rem;
+}
+
+.tile a button,
+.tile button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tile.vault a button {
+  background-color: #4ade80;
+  color: #fff;
+}
+.tile.vault a button:hover {
+  background-color: #16a34a;
+}
+
+.tile.disabled button {
+  background-color: #555;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.vault-footer {
+  margin-top: 50px;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Light Mode Overrides */
+.vault-container.light .tile {
+  background: rgba(0,0,0,0.03);
+  color: #222;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.vault-container.light .tile:hover:not(.disabled) {
+  background: rgba(0,0,0,0.08);
+}
+.vault-container.light .tile.vault a button {
+  background-color: #16a34a;
+}

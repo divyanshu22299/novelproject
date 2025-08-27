@@ -1,0 +1,204 @@
+/* ---- Auth Page Container ---- */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f3f4f6; /* light background */
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+/* ---- Auth Form Container ---- */
+.auth-page .auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  max-width: 800px;
+  padding: 40px 50px;
+  border-radius: 12px;
+  background: #ffffff; /* white form */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ---- Form Title ---- */
+.auth-page .auth-container h2 {
+  text-align: center;
+  
+  margin-bottom: 25px;
+  color: #111827; /* dark text */
+  font-size: 30px;
+  font-weight: 600;
+}
+
+/* ---- Inputs ---- */
+.auth-page .auth-container input {
+  width: 100%;
+  padding: 14px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb; /* light input */
+  
+  color: #111827;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.auth-page .auth-container input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+}
+
+/* ---- Password Field Wrapper ---- */
+.auth-page .auth-container .password-field {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.auth-page .auth-container .password-field input {
+  padding-right: 50px; /* space for the button */
+}
+
+
+.auth-page .auth-container .password-field button {
+  position: absolute;
+  right: 10px;
+  top: 19px;
+  transform: translateY(-50%);
+  background-color: #e5e7eb; /* light gray */
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #374151; /* dark gray */
+  cursor: pointer;
+  font-size: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.auth-page .auth-container .password-field button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+
+
+/* Remember Me Container */
+.auth-page .auth-container .remember-me {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #111827;
+}
+
+/* Hide default checkbox */
+.auth-page .auth-container .remember-me input[type="checkbox"] {
+  display: none;
+}
+
+/* Custom Checkbox */
+.auth-page .auth-container .remember-me label {
+  position: relative;
+  padding-left: 36px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Outer box */
+.auth-page .auth-container .remember-me label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border: 2px solid #3b82f6;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Checkmark */
+.auth-page .auth-container .remember-me input[type="checkbox"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 0px;
+  width: 6px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Checked background */
+.auth-page .auth-container .remember-me input[type="checkbox"]:checked + label::before {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* ---- Submit Button ---- */
+.auth-page .auth-container button {
+  width: 100%;
+  padding: 14px 0;
+  margin-top: 5px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-page .auth-container button:hover {
+  background: #2563eb;
+}
+
+/* ---- Toggle Auth (Login/Signup Switch) ---- */
+.auth-page .auth-container .toggle-auth {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #111827;
+}
+
+.auth-page .auth-container .toggle-auth button {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 0;
+}
+
+/* ---- Error Messages ---- */
+.auth-page .auth-container .error {
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ---- Fade In Animation ---- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
