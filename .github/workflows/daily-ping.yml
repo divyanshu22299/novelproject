@@ -1,0 +1,14 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'  # Runs every 1 minute
+  workflow_dispatch:
+
+jobs:
+  curl-website:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run cURL on Website
+        run: curl -I https://novelproject.onrender.com
