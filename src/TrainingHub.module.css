@@ -1,0 +1,288 @@
+/* Root Variables */
+:root {
+  --primary-color: #1A237E;
+  --secondary-color: #4DD0E1;
+  --bg-color: #F5F5F5;
+  --card-bg: #ffffff;
+  --text-color: #263238;
+  --border-color: #CFD8DC;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  width: 95%;
+  background: var(--card-bg);
+  color: var(--primary-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  z-index: 9999; /* ensure header stays on top */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+header nav a {
+  color: var(--text-color);
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  position: relative;
+}
+
+header nav a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease-in-out;
+}
+
+header nav a:hover {
+  color: var(--secondary-color);
+}
+
+header nav a:hover:after {
+  width: 100%;
+}
+
+/* Main Layout */
+.main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  z-index: 1; /* below header */
+}
+
+.sidebarTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.sidebarSearch {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+}
+
+.sidebarSearch:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.2);
+}
+
+.sidebarNav {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebarLink {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.sidebarLink:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+/* Content Area */
+.content {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+.contentTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+/* Module Cards */
+.moduleCard {
+  background: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+.moduleCard:hover {
+  border-left: 4px solid var(--secondary-color);
+}
+
+.moduleHeader {
+  background: var(--border-color);
+  color: var(--text-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease;
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+.moduleHeader:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.moduleHeader h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.moduleIcon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.moduleIconRotate {
+  transform: rotate(180deg);
+}
+
+.moduleContent {
+  padding: 0 1.75rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+.moduleContentOpen {
+  max-height: 1000px;
+  padding: 1.5rem 1.75rem;
+}
+
+/* Resources */
+.resources {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+  margin: 3rem auto;
+  position: relative;
+  z-index: 1; /* below header */
+}
+
+.resources h2 {
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.resourcesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.resourcesLink {
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  display: block;
+  background: var(--bg-color);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.resourcesLink:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: #616161;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .sidebar {
+    position: static;
+    margin-bottom: 2rem;
+  }
+  header {
+    padding: 1rem;
+  }
+  .contentTitle {
+    text-align: center;
+  }
+}
