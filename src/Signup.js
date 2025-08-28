@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import "./loginSignup.css";
 
-export default function Signup({ onSignup }) {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,26 +32,25 @@ export default function Signup({ onSignup }) {
     }
 
     if (!validatePassword(password)) {
-      setError(
-        "Password must be at least 6 characters, include 1 uppercase letter and 1 number"
-      );
+      setError("Password must be at least 6 characters, include 1 uppercase letter and 1 number");
       return;
     }
 
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Send email verification with custom URL (update with your app URL)
+      // Send verification email
       await sendEmailVerification(userCred.user, {
         url: "https://yourapp.com/login", // redirect after verification
       });
 
+      // Sign out immediately so user can't access home without verification
+      await signOut(auth);
+
       setSuccessMessage(
-        "Signup successful! A verification email has been sent. Please verify your email before logging in."
+        "Signup successful! Please check your email and verify your account before logging in."
       );
 
-      // Optionally notify parent component
-      if (onSignup) onSignup(userCred.user);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setError("An account with this email already exists");
