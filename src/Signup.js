@@ -51,7 +51,7 @@ export default function Signup() {
 
       // Send verification email
       await sendEmailVerification(userCred.user, {
-        url: "https://yourapp.com/login", // 🔹 change to your deployed login URL
+        url: "https://novelcustom.netlify.app/", // 🔹 change to your deployed login URL
       });
 
       // Immediately sign out so user can’t enter without verification
