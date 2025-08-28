@@ -32,18 +32,22 @@ export default function Signup({ onSignup }) {
     }
 
     if (!validatePassword(password)) {
-      setError("Password must be at least 6 characters, include 1 uppercase letter and 1 number");
+      setError(
+        "Password must be at least 6 characters, include 1 uppercase letter and 1 number"
+      );
       return;
     }
 
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Send email verification using Firebase
-      await sendEmailVerification(userCred.user);
+      // Send email verification with custom URL (update with your app URL)
+      await sendEmailVerification(userCred.user, {
+        url: "https://yourapp.com/login", // redirect after verification
+      });
 
       setSuccessMessage(
-        "Signup successful! A verification email has been sent. Please verify your email before login."
+        "Signup successful! A verification email has been sent. Please verify your email before logging in."
       );
 
       // Optionally notify parent component
@@ -73,7 +77,7 @@ export default function Signup({ onSignup }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="button" onClick={() => setShowPassword(prev => !prev)}>
+        <button type="button" onClick={() => setShowPassword((prev) => !prev)}>
           {showPassword ? "🙈" : "👁️"}
         </button>
       </div>

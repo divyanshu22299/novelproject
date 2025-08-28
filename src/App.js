@@ -7,10 +7,10 @@ import CloudPage from "./CloudPage";
 import ClientPage from "./ClientPage";
 import Login from "./Login";
 import Signup from "./Signup";
-import { auth } from "./firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth, } from "./firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth"; // signOut imported correctly
 import "./App.css";
-import "./loginSignup.css"; // Import the login/signup CSS
+import "./loginSignup.css";
 
 // Home Component
 function Home({ darkMode }) {
@@ -65,8 +65,9 @@ function AppWrapper() {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  const [user, setUser] = useState(null);
-  const [isLogin, setIsLogin] = useState(true); // toggle between login/signup
+  const [user, setUser] = useState(null); // Only verified users
+  const [isLogin, setIsLogin] = useState(true);
+  const [unverifiedEmail, setUnverifiedEmail] = useState(""); // Store unverified email
 
   useEffect(() => {
     try { localStorage.setItem("theme", darkMode ? "dark" : "light"); } catch {}
@@ -74,16 +75,21 @@ function AppWrapper() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser && currentUser.emailVerified) {
+        setUser(currentUser);
+        setUnverifiedEmail("");
+      } else {
+        setUser(null);
+        if (currentUser) setUnverifiedEmail(currentUser.email);
+      }
     });
     return () => unsubscribe();
   }, []);
 
   const toggleTheme = () => setDarkMode(prev => !prev);
-
   const showToggle = location.pathname === "/" || location.pathname === "/vault";
 
-  // Show Login or Signup if not logged in
+  // Show Login or Signup if not logged in or unverified
   if (!user) {
     return (
       <div className={`auth-page ${darkMode ? "dark" : "light"}`}>
@@ -92,18 +98,21 @@ function AppWrapper() {
             <div className="auth-container">
               <Login onLogin={setUser} />
               <p className="toggle-auth">
-                Don’t have an account?
-                <button onClick={() => setIsLogin(false)}>Sign Up</button>
+                Don’t have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button>
               </p>
             </div>
           ) : (
             <div className="auth-container">
               <Signup onSignup={setUser} />
               <p className="toggle-auth">
-                Already have an account?
-                <button onClick={() => setIsLogin(true)}>Login</button>
+                Already have an account? <button onClick={() => setIsLogin(true)}>Login</button>
               </p>
             </div>
+          )}
+          {unverifiedEmail && (
+            <p className="error" style={{ marginTop: "10px" }}>
+              Your email <b>{unverifiedEmail}</b> is not verified. Please check your inbox.
+            </p>
           )}
         </div>
       </div>
