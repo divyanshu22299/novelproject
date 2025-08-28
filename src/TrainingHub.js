@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import styles from "./TrainingHub.module.css";
 
 const ModuleCard = ({ id, module, isExpanded, onToggle }) => (
-  <article id={id} className={styles.moduleCard} aria-expanded={isExpanded}>
+ <div id={id} className={styles.moduleCard} aria-expanded={isExpanded}>
     <header
       className={styles.moduleHeader}
       onClick={() => onToggle(module.id)}
@@ -43,7 +43,7 @@ const ModuleCard = ({ id, module, isExpanded, onToggle }) => (
         ))}
       </ul>
     </section>
-  </article>
+  </div>
 );
 
 function TrainingHub() {
