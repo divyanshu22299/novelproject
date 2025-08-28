@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signOut,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // 👈 for redirect
 import "./loginSignup.css";
 
 export default function Signup() {
@@ -8,8 +13,8 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const validatePassword = (pwd) => {
     const uppercase = /[A-Z]/;
@@ -19,7 +24,6 @@ export default function Signup() {
 
   const handleSignUp = async () => {
     setError("");
-    setSuccessMessage("");
 
     if (!email.endsWith("@novelveritas.com")) {
       setError("Only @novelveritas.com emails are allowed");
@@ -32,25 +36,34 @@ export default function Signup() {
     }
 
     if (!validatePassword(password)) {
-      setError("Password must be at least 6 characters, include 1 uppercase letter and 1 number");
+      setError(
+        "Password must be at least 6 characters, include 1 uppercase letter and 1 number"
+      );
       return;
     }
 
     try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      const userCred = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       // Send verification email
       await sendEmailVerification(userCred.user, {
-        url: "https://yourapp.com/login", // redirect after verification
+        url: "https://yourapp.com/login", // 🔹 change to your deployed login URL
       });
 
-      // Sign out immediately so user can't access home without verification
+      // Immediately sign out so user can’t enter without verification
       await signOut(auth);
 
-      setSuccessMessage(
-        "Signup successful! Please check your email and verify your account before logging in."
+      // Show popup
+      alert(
+        "Signup successful! Please check your email inbox and verify your account before logging in."
       );
 
+      // Redirect to login page
+      navigate("/login");
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setError("An account with this email already exists");
@@ -88,7 +101,6 @@ export default function Signup() {
       />
       <button onClick={handleSignUp}>Sign Up</button>
       {error && <p className="error">{error}</p>}
-      {successMessage && <p className="success">{successMessage}</p>}
     </div>
   );
 }
