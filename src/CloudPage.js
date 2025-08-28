@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CloudPage.css";
+import { auth } from "./firebase";
 
 export default function CloudPage() {
   const [clients, setClients] = useState([]);
