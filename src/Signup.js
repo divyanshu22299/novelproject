@@ -17,18 +17,6 @@ export default function Signup({ onSignup }) {
     return pwd.length >= 6 && uppercase.test(pwd) && number.test(pwd);
   };
 
-  // Optional: check if email actually exists using free API
-  const verifyEmailExists = async (email) => {
-    try {
-      const response = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=YOUR_API_KEY&email=${email}`);
-      const data = await response.json();
-      return data.deliverability === "DELIVERABLE"; // true if real email
-    } catch (err) {
-      console.error(err);
-      return false; // fail-safe: assume invalid if API fails
-    }
-  };
-
   const handleSignUp = async () => {
     setError("");
     setSuccessMessage("");
@@ -48,23 +36,18 @@ export default function Signup({ onSignup }) {
       return;
     }
 
-    // Check if email exists
-    const isRealEmail = await verifyEmailExists(email);
-    if (!isRealEmail) {
-      setError("This email does not exist or cannot receive emails");
-      return;
-    }
-
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Send email verification
+      // Send email verification using Firebase
       await sendEmailVerification(userCred.user);
+
       setSuccessMessage(
-        "Signup successful! Verification email sent. Please verify your email before login."
+        "Signup successful! A verification email has been sent. Please verify your email before login."
       );
 
-      onSignup(userCred.user);
+      // Optionally notify parent component
+      if (onSignup) onSignup(userCred.user);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setError("An account with this email already exists");
@@ -90,7 +73,7 @@ export default function Signup({ onSignup }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={() => setShowPassword(prev => !prev)}>
+        <button type="button" onClick={() => setShowPassword(prev => !prev)}>
           {showPassword ? "🙈" : "👁️"}
         </button>
       </div>
