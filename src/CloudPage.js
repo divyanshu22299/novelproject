@@ -27,7 +27,7 @@ export default function CloudPage() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/clients");
+        const res = await axios.get("https://novelproject.onrender.com/api/clients");
         const clientsWithEnv = res.data.map(c => ({ ...c, currentEnv: "prd" }));
         setClients(clientsWithEnv);
         setFilteredClients(clientsWithEnv);
@@ -56,7 +56,7 @@ export default function CloudPage() {
 
   const saveEditedCredentials = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/clients/${editingClient._id}`, editingClient);
+      await axios.put(`https://novelproject.onrender.com/api/clients/${editingClient._id}`, editingClient);
       setClients(prev => prev.map(c => c._id === editingClient._id ? editingClient : c));
       setEditingClient(null);
     } catch (err) {
