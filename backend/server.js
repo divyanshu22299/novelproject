@@ -9,6 +9,10 @@ const clientRoutes = require("./routes/clients"); // <-- here
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const usersRouter = require("./routes/users");
+app.use("/api/users", usersRouter);
+
+
 // Middleware
 app.use(cors());
 app.use(express.json());
