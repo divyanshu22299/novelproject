@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -8,14 +6,12 @@
 # testing
 /coverage
 
+# backend secrets
 backend/serviceAccountKey.json
+backend/.env
 
 # production
 /build
-
-# Ignore backend .env file
-backend/.env
-
 
 # misc
 .DS_Store
@@ -27,4 +23,3 @@ backend/.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-"backend/serviceAccountKey.json" 
