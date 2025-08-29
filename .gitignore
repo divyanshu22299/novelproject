@@ -8,6 +8,8 @@
 # testing
 /coverage
 
+backend/serviceAccountKey.json
+
 # production
 /build
 
