@@ -1,3 +1,4 @@
+//server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -29,3 +30,6 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+const logRoutes = require("./routes/logs");
+app.use("/api/logs", logRoutes);

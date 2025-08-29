@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import VaultPage from "./VaultPage";
@@ -7,15 +6,15 @@ import CloudPage from "./CloudPage";
 import ClientPage from "./ClientPage";
 import Login from "./Login";
 import Signup from "./Signup";
-import { auth, } from "./firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth"; // signOut imported correctly
+import { auth } from "./firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import "./App.css";
 import "./loginSignup.css";
 
 // Home Component
-function Home({ darkMode }) {
+function Home() {
   return (
-    <div className={`home-container ${darkMode ? "dark" : "light"}`}>
+    <div className="home-container">
       <header className="home-header">
         <h1>NOVEL SAP Portal</h1>
         <p>Secure client management & continuous learning in one place</p>
@@ -46,9 +45,7 @@ function Home({ darkMode }) {
 function ThemeToggle({ darkMode, toggleTheme }) {
   return (
     <div className="theme-toggle" onClick={toggleTheme}>
-      <div className={`toggle-ball ${darkMode ? "dark" : "light"}`}>
-        {darkMode ? "🌙" : "☀️"}
-      </div>
+      <div className="toggle-ball">{darkMode ? "🌙" : "☀️"}</div>
     </div>
   );
 }
@@ -65,9 +62,9 @@ function AppWrapper() {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  const [user, setUser] = useState(null); // Only verified users
+  const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(true);
-  const [unverifiedEmail, setUnverifiedEmail] = useState(""); // Store unverified email
+  const [unverifiedEmail, setUnverifiedEmail] = useState("");
 
   useEffect(() => {
     try { localStorage.setItem("theme", darkMode ? "dark" : "light"); } catch {}
@@ -89,10 +86,9 @@ function AppWrapper() {
   const toggleTheme = () => setDarkMode(prev => !prev);
   const showToggle = location.pathname === "/" || location.pathname === "/vault";
 
-  // Show Login or Signup if not logged in or unverified
   if (!user) {
     return (
-      <div className={`auth-page ${darkMode ? "dark" : "light"}`}>
+      <div className={`auth-page ${darkMode ? "theme-dark" : "theme-light"}`}>
         <div className="auth-forms">
           {isLogin ? (
             <div className="auth-container">
@@ -121,14 +117,13 @@ function AppWrapper() {
 
   // Logged-in view
   return (
-    <div className={darkMode ? "dark" : "light"}>
-      <button className="logout-btn" onClick={() => signOut(auth)}>Logout</button>
+    <div className={darkMode ? "theme-dark" : "theme-light"}>
       {showToggle && <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />}
-
+      <button className="logout-btn" onClick={() => signOut(auth)}>Logout</button>
       <Routes>
-        <Route path="/" element={<Home darkMode={darkMode} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/vault" element={<VaultPage darkMode={darkMode} />} />
-        <Route path="/vault/cloud" element={<CloudPage />} />
+        <Route path="/vault/cloud" element={<CloudPage darkMode={darkMode} />} />
         <Route path="/vault/cloud/:clientName" element={<ClientPage />} />
         <Route path="/training" element={<TrainingHub />} />
       </Routes>
@@ -137,12 +132,10 @@ function AppWrapper() {
 }
 
 // Main App
-function App() {
+export default function App() {
   return (
     <Router>
       <AppWrapper />
     </Router>
   );
 }
-
-export default App;

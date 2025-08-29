@@ -1,3 +1,18 @@
+/* ---- Page Wrapper ---- */
+.theme-light {
+  background: #ffffff;
+  color: #222;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.theme-dark {
+  background: #121212;
+  color: #e5e5e5;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
 /* ---- Container ---- */
 .home-container {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -5,9 +20,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px 20px;
-  transition: background 0.3s ease, color 0.3s ease;
-  background: #121212;
-  color: #e5e5e5;
+  transition: color 0.3s ease;
 }
 
 /* ---- Header ---- */
@@ -35,8 +48,6 @@
 /* ---- Tile Card ---- */
 .tile {
   padding: 30px;
-  background: rgba(255,255,255,0.05);
-  color: inherit;
   border-radius: 16px;
   cursor: pointer;
   font-weight: 600;
@@ -51,13 +62,29 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
 }
-.tile:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+
+/* Tile background for dark/light mode */
+.theme-dark .tile {
+  background: rgba(255,255,255,0.05);
+  color: #e5e5e5;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.theme-dark .tile:hover {
   background: rgba(255,255,255,0.12);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* ---- Tile Title ---- */
+.theme-light .tile {
+  background: rgba(0,0,0,0.03);
+  color: #222;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.theme-light .tile:hover {
+  background: rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ---- Tile Titles ---- */
 .tile h2 {
   margin-bottom: 10px;
   font-size: 1.4rem;
@@ -92,53 +119,58 @@
   background-color: #1d4ed8;
 }
 
-/* ---- Dark / Light Mode Toggle ---- */
+/* ---- Theme Toggle ---- */
 .theme-toggle {
   width: 60px;
   height: 30px;
   border-radius: 30px;
-  background: linear-gradient(145deg, #3a3a3a, #2c2c2c);
   display: flex;
   align-items: center;
   padding: 4px;
   cursor: pointer;
-  position: fixed;  /* FIXED GLOBALLY */
+  position: fixed;
   top: 20px;
   right: 20px;
   transition: background 0.5s ease;
   z-index: 9999;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 .toggle-ball {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   transition: transform 0.5s ease, background 0.5s ease;
 }
-.theme-toggle .toggle-ball.dark { transform: translateX(0); }
-.theme-toggle .toggle-ball.light { transform: translateX(30px) rotate(360deg); background: #ffd93b; }
 
-/* ---- Light Mode ---- */
-.home-container.light {
-  background: #f7f7f7;
-  color: #222;
+/* Move ball depending on wrapper theme */
+.theme-dark .toggle-ball {
+  transform: translateX(0);
+  background: #fff;
+}
+.theme-light .toggle-ball {
+  transform: translateX(30px) rotate(360deg);
+  background: #ffd93b;
 }
 
-
-.home-container.light .tile {
-  background: rgba(0,0,0,0.03);
-  color: #222;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+/* Toggle colors */
+.theme-dark .theme-toggle {
+  background-color: #374151;
+  color: #f9fafb;
 }
-.home-container.light .tile:hover {
-  background: rgba(0,0,0,0.08);
+.theme-dark .theme-toggle:hover {
+  background-color: #4b5563;
 }
-.home-container.light .tile.vault a button { background-color: #16a34a; }
-.home-container.light .tile.training a button { background-color: #1d4ed8; }
+.theme-light .theme-toggle {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+.theme-light .theme-toggle:hover {
+  background-color: #d1d5db;
+}
 
 /* ---- Footer ---- */
 .home-footer {
@@ -146,32 +178,33 @@
   margin-top: 80px;
   color: inherit;
 }
+
 /* ---- Logout Button ---- */
 .logout-btn {
-  margin: 20px; /* space from top and sides */
+  margin: 20px;
   padding: 8px 16px;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: #ef4444; /* red for logout */
-  color: #fff;
   box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-/* Hover effect */
-.logout-btn:hover {
+.theme-dark .logout-btn {
+  background-color: #ef4444;
+  color: #fff;
+}
+.theme-dark .logout-btn:hover {
   background-color: #dc2626;
   transform: translateY(-2px);
 }
 
-/* Light mode adjustments */
-.light .logout-btn {
+.theme-light .logout-btn {
   background-color: #b91c1c;
   color: #fff;
 }
-
-.light .logout-btn:hover {
+.theme-light .logout-btn:hover {
   background-color: #991b1b;
+  transform: translateY(-2px);
 }

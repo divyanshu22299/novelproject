@@ -19,7 +19,7 @@
 }
 
 /* Header */
-header {
+.header {
   position: sticky;
   top: 0;
   width: 95%;
@@ -30,16 +30,16 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  z-index: 9999; /* ensure header stays on top */
+  z-index: 9999;
 }
 
-header h1 {
+.headerTitle {
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
 }
 
-header nav a {
+.headerNav a {
   color: var(--text-color);
   font-weight: 500;
   text-decoration: none;
@@ -47,7 +47,7 @@ header nav a {
   position: relative;
 }
 
-header nav a:after {
+.headerNav a:after {
   content: '';
   position: absolute;
   width: 0;
@@ -58,11 +58,11 @@ header nav a:after {
   transition: width 0.3s ease-in-out;
 }
 
-header nav a:hover {
+.headerNav a:hover {
   color: var(--secondary-color);
 }
 
-header nav a:hover:after {
+.headerNav a:hover:after {
   width: 100%;
 }
 
@@ -73,7 +73,7 @@ header nav a:hover:after {
   gap: 2.5rem;
   margin-top: 2rem;
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 /* Sidebar */
@@ -85,7 +85,7 @@ header nav a:hover:after {
   position: sticky;
   top: 100px;
   align-self: start;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .sidebarTitle {
@@ -141,7 +141,7 @@ header nav a:hover:after {
   padding: 2rem;
   box-shadow: 0 4px 18px rgba(0,0,0,0.05);
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .contentTitle {
@@ -163,7 +163,7 @@ header nav a:hover:after {
   border-left: 4px solid transparent;
   transition: all 0.3s ease;
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .moduleCard:hover {
@@ -181,7 +181,7 @@ header nav a:hover:after {
   user-select: none;
   transition: background 0.3s ease;
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .moduleHeader:hover {
@@ -210,7 +210,7 @@ header nav a:hover:after {
   overflow: hidden;
   transition: max-height 0.5s ease, padding 0.3s ease;
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .moduleContentOpen {
@@ -226,7 +226,7 @@ header nav a:hover:after {
   box-shadow: 0 4px 18px rgba(0,0,0,0.05);
   margin: 3rem auto;
   position: relative;
-  z-index: 1; /* below header */
+  z-index: 1;
 }
 
 .resources h2 {
@@ -262,7 +262,7 @@ header nav a:hover:after {
 }
 
 /* Footer */
-footer {
+.footer {
   text-align: center;
   padding: 2rem 0;
   color: #616161;
@@ -279,7 +279,7 @@ footer {
     position: static;
     margin-bottom: 2rem;
   }
-  header {
+  .header {
     padding: 1rem;
   }
   .contentTitle {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import styles from "./TrainingHub.module.css";
 
 const ModuleCard = ({ id, module, isExpanded, onToggle }) => (
- <div id={id} className={styles.moduleCard} aria-expanded={isExpanded}>
+  <div id={id} className={styles.moduleCard} aria-expanded={isExpanded}>
     <header
       className={styles.moduleHeader}
       onClick={() => onToggle(module.id)}
@@ -58,9 +58,18 @@ function TrainingHub() {
         description: "SAP's programming language for custom development.",
         keyTopics: "Syntax, Reports, Forms, Data Dictionary, ALV, BAPIs.",
         resources: [
-          { title: "SAP ABAP Documentation", url: "https://help.sap.com/viewer/product/ABAP_PLATFORM/" },
-          { title: "openSAP ABAP for Beginners", url: "https://open.sap.com/courses/abap1" },
-          { title: "Guru99 ABAP Tutorials", url: "https://www.guru99.com/free-abap-tutorials.html" },
+          {
+            title: "SAP ABAP Documentation",
+            url: "https://help.sap.com/viewer/product/ABAP_PLATFORM/",
+          },
+          {
+            title: "openSAP ABAP for Beginners",
+            url: "https://open.sap.com/courses/abap1",
+          },
+          {
+            title: "Guru99 ABAP Tutorials",
+            url: "https://www.guru99.com/free-abap-tutorials.html",
+          },
         ],
       },
       {
@@ -69,8 +78,14 @@ function TrainingHub() {
         description: "Production Planning and Control module for SAP ERP.",
         keyTopics: "MRP, BOM, Work Centers, Routing, Production Orders.",
         resources: [
-          { title: "SAP PP Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
-          { title: "openSAP Production Planning", url: "https://open.sap.com/courses/pp1" },
+          {
+            title: "SAP PP Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
+          {
+            title: "openSAP Production Planning",
+            url: "https://open.sap.com/courses/pp1",
+          },
         ],
       },
       {
@@ -79,7 +94,10 @@ function TrainingHub() {
         description: "Procurement and inventory management module.",
         keyTopics: "Purchase Orders, Material Master, Inventory, Subcontracting.",
         resources: [
-          { title: "SAP MM Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP MM Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP MM Course", url: "https://open.sap.com/courses/mm1" },
         ],
       },
@@ -89,7 +107,10 @@ function TrainingHub() {
         description: "Manages customer orders, shipping, billing, and invoicing.",
         keyTopics: "Sales Orders, Pricing, Delivery, Billing.",
         resources: [
-          { title: "SAP SD Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP SD Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP SD Course", url: "https://open.sap.com/courses/sd1" },
         ],
       },
@@ -97,9 +118,13 @@ function TrainingHub() {
         id: "ficoContent",
         title: "FI/CO (Financial Accounting & Controlling)",
         description: "Finance and management accounting module.",
-        keyTopics: "GL, AR, AP, Asset Accounting, Cost Center, Profit Center.",
+        keyTopics:
+          "GL, AR, AP, Asset Accounting, Cost Center, Profit Center.",
         resources: [
-          { title: "SAP FI/CO Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP FI/CO Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP FI Course", url: "https://open.sap.com/courses/fi1" },
         ],
       },
@@ -109,17 +134,24 @@ function TrainingHub() {
         description: "Manages employee data, payroll, and HR processes.",
         keyTopics: "Personnel Administration, Payroll, Time Management.",
         resources: [
-          { title: "SAP HCM Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP HCM Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP HCM Course", url: "https://open.sap.com/courses/hcm1" },
         ],
       },
       {
         id: "wmContent",
         title: "WM (Warehouse Management)",
-        description: "Advanced inventory management and warehouse operations.",
+        description:
+          "Advanced inventory management and warehouse operations.",
         keyTopics: "Storage, Transfer Orders, Inventory Movements.",
         resources: [
-          { title: "SAP WM Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP WM Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP WM Course", url: "https://open.sap.com/courses/wm1" },
         ],
       },
@@ -129,7 +161,10 @@ function TrainingHub() {
         description: "Ensures product quality and compliance.",
         keyTopics: "Inspections, Quality Notifications, Audits.",
         resources: [
-          { title: "SAP QM Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP QM Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP QM Course", url: "https://open.sap.com/courses/qm1" },
         ],
       },
@@ -139,7 +174,10 @@ function TrainingHub() {
         description: "Manages maintenance planning and execution.",
         keyTopics: "Maintenance Orders, Preventive Maintenance, Notifications.",
         resources: [
-          { title: "SAP PM Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP PM Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP PM Course", url: "https://open.sap.com/courses/pm1" },
         ],
       },
@@ -149,7 +187,10 @@ function TrainingHub() {
         description: "Planning, execution, and monitoring of projects.",
         keyTopics: "Project Structures, WBS, Networks, Milestones.",
         resources: [
-          { title: "SAP PS Overview", url: "https://help.sap.com/viewer/product/SAP_ERP/" },
+          {
+            title: "SAP PS Overview",
+            url: "https://help.sap.com/viewer/product/SAP_ERP/",
+          },
           { title: "openSAP PS Course", url: "https://open.sap.com/courses/ps1" },
         ],
       },
@@ -181,9 +222,10 @@ function TrainingHub() {
 
   return (
     <div className={styles.container}>
-      <header>
-        <h1>SAP Training Hub</h1>
-        <nav>
+      {/* Scoped Header */}
+      <header className={styles.header}>
+        <h1 className={styles.headerTitle}>SAP Training Hub</h1>
+        <nav className={styles.headerNav}>
           <a href="#modules">Modules</a>
           <a href="#resources">Resources</a>
           <a href="#top">Top</a>
@@ -284,7 +326,8 @@ function TrainingHub() {
         </ul>
       </section>
 
-      <footer>
+      {/* Scoped Footer */}
+      <footer className={styles.footer}>
         <p>© 2024 SAP Training Hub. All rights reserved.</p>
       </footer>
     </div>

@@ -205,3 +205,61 @@
 .cloud-container.light .env-block {
   color: white !important; /* solid dark text for better readability */
 }
+
+
+/* ---- Logs Table ---- */
+.modal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+    max-height: 400px; /* limit height */
+  overflow-y: auto;  /* enable scroll */
+  font-size: 0.9rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal table thead {
+  background: #2a2a2a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.modal table thead th {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.modal table tbody tr {
+  border-bottom: 1px solid #333;
+  transition: background 0.2s ease;
+}
+
+.modal table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modal table td {
+  padding: 10px 16px;
+  color: #ddd;
+  word-break: break-word;
+}
+
+/* Alternate row shading */
+.modal table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Light mode */
+.cloud-container.light .modal table thead {
+  background: #f0f0f0;
+  color: #222;
+}
+
+.cloud-container.light .modal table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.cloud-container.light .modal table td {
+  color: #333;
+}
