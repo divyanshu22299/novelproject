@@ -363,30 +363,20 @@ export default function CloudPage() {
                       <div className="modal-field" key={field}>
                         <label>{field.toUpperCase()}</label>
                         <input
-                          readOnly
-                          type={
-                            field === "password" &&
-                            visibleEnvs[selectedClient._id] !== env
-                              ? "password"
-                              : "text"
-                          }
-                          value={
-                            visibleEnvs[selectedClient._id] === env
-                              ? selectedClient[env]?.[field] || ""
-                              : field === "password"
-                              ? "********"
-                              : ""
-                          }
-                          onClick={() => {
-                            if (
-                              visibleEnvs[selectedClient._id] === env
-                            ) {
-                              navigator.clipboard.writeText(
-                                selectedClient[env]?.[field] || ""
-                              );
-                            }
-                          }}
-                        />
+  readOnly
+  type={visibleEnvs[selectedClient._id] === env ? "text" : "password"}
+  value={
+    visibleEnvs[selectedClient._id] === env
+      ? selectedClient[env]?.[field] || ""
+      : "*************************************"
+  }
+  onClick={() => {
+    if (visibleEnvs[selectedClient._id] === env) {
+      navigator.clipboard.writeText(selectedClient[env]?.[field] || "");
+    }
+  }}
+/>
+                      
                       </div>
                     ))}
                   </div>
