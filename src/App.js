@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import VaultPage from "./VaultPage";
 import TrainingHub from "./TrainingHub";
 import CloudPage from "./CloudPage";
@@ -23,19 +30,30 @@ function Home() {
       <div className="tiles-grid">
         <div className="tile vault">
           <h2>🔐 Client Credentials Vault</h2>
-          <p>Securely store and manage all client SAP IDs, passwords, and system links.</p>
-          <Link to="/vault"><button>Go to Vault</button></Link>
+          <p>
+            Securely store and manage all client SAP IDs, passwords, and system
+            links.
+          </p>
+          <Link to="/vault">
+            <button>Go to Vault</button>
+          </Link>
         </div>
 
         <div className="tile training">
           <h2>📘 Training & Learning Hub</h2>
-          <p>Access SAP training resources, videos, and guides for continuous learning.</p>
-          <Link to="/training"><button>Go to Training</button></Link>
+          <p>
+            Access SAP training resources, videos, and guides for continuous
+            learning.
+          </p>
+          <Link to="/training">
+            <button>Go to Training</button>
+          </Link>
         </div>
       </div>
 
       <footer className="home-footer">
-        &copy; 2025 SAP Provider Office. All rights reserved dev @ Divyanshu Singh Chouhan.
+        &copy; 2025 SAP Provider Office. All rights reserved dev @ Divyanshu
+        Singh Chouhan.
       </footer>
     </div>
   );
@@ -59,15 +77,19 @@ function AppWrapper() {
       if (saved === "dark") return true;
       if (saved === "light") return false;
     } catch {}
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
   });
 
   const [user, setUser] = useState(null);
-  const [isLogin, setIsLogin] = useState(true);
   const [unverifiedEmail, setUnverifiedEmail] = useState("");
 
   useEffect(() => {
-    try { localStorage.setItem("theme", darkMode ? "dark" : "light"); } catch {}
+    try {
+      localStorage.setItem("theme", darkMode ? "dark" : "light");
+    } catch {}
   }, [darkMode]);
 
   useEffect(() => {
@@ -83,31 +105,25 @@ function AppWrapper() {
     return () => unsubscribe();
   }, []);
 
-  const toggleTheme = () => setDarkMode(prev => !prev);
+  const toggleTheme = () => setDarkMode((prev) => !prev);
   const showToggle = location.pathname === "/" || location.pathname === "/vault";
 
+  // Unauthenticated view (login/signup)
   if (!user) {
     return (
       <div className={`auth-page ${darkMode ? "theme-dark" : "theme-light"}`}>
         <div className="auth-forms">
-          {isLogin ? (
-            <div className="auth-container">
-              <Login onLogin={setUser} />
-              <p className="toggle-auth">
-                Don’t have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button>
-              </p>
-            </div>
-          ) : (
-            <div className="auth-container">
-              <Signup onSignup={setUser} />
-              <p className="toggle-auth">
-                Already have an account? <button onClick={() => setIsLogin(true)}>Login</button>
-              </p>
-            </div>
-          )}
+          <Routes>
+            <Route path="/login" element={<Login onLogin={setUser} />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Routes>
+
           {unverifiedEmail && (
             <p className="error" style={{ marginTop: "10px" }}>
-              Your email <b>{unverifiedEmail}</b> is not verified. Please check your inbox.
+              Your email <b>{unverifiedEmail}</b> is not verified. Please check
+              your inbox.
             </p>
           )}
         </div>
@@ -118,14 +134,20 @@ function AppWrapper() {
   // Logged-in view
   return (
     <div className={darkMode ? "theme-dark" : "theme-light"}>
-      {showToggle && <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />}
-      <button className="logout-btn" onClick={() => signOut(auth)}>Logout</button>
+      {showToggle && (
+        <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+      )}
+      <button className="logout-btn" onClick={() => signOut(auth)}>
+        Logout
+      </button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/vault" element={<VaultPage darkMode={darkMode} />} />
         <Route path="/vault/cloud" element={<CloudPage darkMode={darkMode} />} />
         <Route path="/vault/cloud/:clientName" element={<ClientPage />} />
         <Route path="/training" element={<TrainingHub />} />
+        {/* fallback to Home if logged in */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );
