@@ -343,7 +343,20 @@ export default function CloudPage() {
         <div className="meta-item">👥 {c.teamSize} team</div>
       </div>
 
-      <div className={`client-status status-${c.status}`}>{c.status}</div>
+      <div
+  className={`client-status ${
+    c.status === "active"
+      ? "status-active"
+      : c.status === "pending"
+      ? "status-pending"
+      : "status-inactive"
+  }`}
+>
+  {c.status === "active" && "🟢 Active"}
+  {c.status === "pending" && "🟡 Pending"}
+  {c.status === "inactive" && "🔴 Inactive"}
+</div>
+
 
       <div className="client-actions">
         <button className="action-btn" onClick={() => setSelectedClient(c)}>View</button>
