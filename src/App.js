@@ -7,6 +7,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
+import Loader from "./Loader";
 import VaultPage from "./VaultPage";
 import TrainingHub from "./TrainingHub";
 import CloudPage from "./CloudPage";
@@ -71,6 +72,7 @@ function ThemeToggle({ darkMode, toggleTheme }) {
 // App Wrapper with authentication and theme
 function AppWrapper() {
   const location = useLocation();
+  const [loading, setLoading] = useState(true); // NEW
   const [darkMode, setDarkMode] = useState(() => {
     try {
       const saved = localStorage.getItem("theme");
@@ -83,6 +85,8 @@ function AppWrapper() {
     );
   });
 
+  
+
   const [user, setUser] = useState(null);
   const [unverifiedEmail, setUnverifiedEmail] = useState("");
 
@@ -92,6 +96,7 @@ function AppWrapper() {
     } catch {}
   }, [darkMode]);
 
+  // ✅ Single onAuthStateChanged with loading fix
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
@@ -101,12 +106,22 @@ function AppWrapper() {
         setUser(null);
         if (currentUser) setUnverifiedEmail(currentUser.email);
       }
+      setLoading(false); // ✅ finish loading once Firebase responds
     });
     return () => unsubscribe();
   }, []);
 
   const toggleTheme = () => setDarkMode((prev) => !prev);
   const showToggle = location.pathname === "/" || location.pathname === "/vault";
+
+  if (loading) {
+  return <Loader />;
+}
+
+  // ✅ First handle loading
+  if (loading) {
+    return <div className="loading">Loading...</div>; // spinner/loader
+  }
 
   // Unauthenticated view (login/signup)
   if (!user) {
@@ -152,7 +167,6 @@ function AppWrapper() {
     </div>
   );
 }
-
 // Main App
 export default function App() {
   return (
